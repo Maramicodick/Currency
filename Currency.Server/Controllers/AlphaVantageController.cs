@@ -1,32 +1,32 @@
-﻿using Domain.DbModels;
+﻿using App;
+using Domain.DbModels;
 using Domain.Deserialized;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Persistence;
 using System.Net;
 
 namespace Currency.Server.Controllers
 {
     public class AlphaVantageController : BaseApiController
     {
-        private readonly DataContext _context;
+        private readonly IMediator _mediator;
 
-        public AlphaVantageController(DataContext context)
+        public AlphaVantageController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<GraphCurrency>>> GetAllCurences()
+        public async Task<ActionResult<List<GraphCurrency>>> GetAllCurrencies()
         {
-            return await _context.GraphCurrencies.ToListAsync();
+            return await _mediator.Send(new CurrencyList.Query());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<GraphCurrency>> GetCurrency(Guid id)
         {
-            return await _context.GraphCurrencies.FindAsync(id);
+            return Ok();
         }
 
         [HttpGet("alpha")]
@@ -43,35 +43,6 @@ namespace Currency.Server.Controllers
 
             return result;
         }
-
-        [HttpGet("GetMonthly")]
-        public async Task<ActionResult<List<GraphCurrency>>> AlphaVantageMonthlyCurrency()
-        {
-            string QUERY_URL = "https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&symbol=BTC&market=USD&apikey=HVTDKKVYMAQYY6LO";
-            Uri queryUri = new Uri(QUERY_URL);
-            MonthlyExchangeRate monthlyExchange;
-
-            using (WebClient client = new WebClient())
-            {
-                monthlyExchange = JsonConvert.DeserializeObject<MonthlyExchangeRate>(client.DownloadString(queryUri));
-            }
-            if (monthlyExchange != null)
-            {
-                foreach (var item in monthlyExchange.TimeSeries)
-                {
-                    GraphCurrency currency = new GraphCurrency
-                    {
-                        Date = DateTime.Parse(item.Key),
-                        ExchangeRate = item.Value.Close
-                    };
-                    _context.GraphCurrencies.Add(currency);
-                    _context.SaveChanges();
-                }
-            }
-
-            return await _context.GraphCurrencies.ToListAsync();
-        }
-
         /*[HttpGet("Monthly")]
         public async Task<ActionResult<MonthlyExchangeRate>> MonthlyFromDb()
         {

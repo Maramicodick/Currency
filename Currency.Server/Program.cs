@@ -1,3 +1,4 @@
+using App;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -17,6 +18,7 @@ builder.Services.AddCors(opt =>
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:5173/");
     });
 });
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CurrencyList.Handler).Assembly));
 
 var app = builder.Build();
 
