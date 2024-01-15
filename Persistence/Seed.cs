@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.DbModels;
 
 namespace Persistence
 {
@@ -6,23 +7,23 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context)
         {
-            if (context.BTCToUSDLiveCurrency.Any()) return;
+            if (context.GraphCurrencies.Any()) return;
 
-            var btcTousdLive = new List<BTCToUSD>
+            var seed = new List<GraphCurrency>
             {
-                new BTCToUSD
+                new GraphCurrency
                 {
                    ExchangeRate = "45879.63000000",
-                   RefreshedTime = DateTime.Parse("2024-01-08"),
+                   Date = DateTime.Parse("2024-01-08"),
                 },
-                new BTCToUSD
+                new GraphCurrency
                 {
                     ExchangeRate = "45279.63000000",
-                    RefreshedTime = DateTime.Parse("2024-01-07"),
+                    Date = DateTime.Parse("2024-01-07"),
                 }
             };
 
-            await context.BTCToUSDLiveCurrency.AddRangeAsync(btcTousdLive);
+            await context.GraphCurrencies.AddRangeAsync(seed);
             await context.SaveChangesAsync();
         }
     }

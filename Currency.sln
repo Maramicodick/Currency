@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.Server", "Currency
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "currency.client", "currency.client\currency.client.esproj", "{0DF04432-522B-4AC5-8D99-E4162DC41B2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F0F7D8EE-83AA-4D2D-BECB-EA58C5EBB183}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{F0F7D8EE-83AA-4D2D-BECB-EA58C5EBB183}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{1FFFEAD8-5CEF-4BB8-9A55-04631E6813B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{1FFFEAD8-5CEF-4BB8-9A55-04631E6813B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{43274C5B-479B-4340-97B7-7B146D8E919E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{1FFFEAD8-5CEF-4BB8-9A55-04631E6813B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FFFEAD8-5CEF-4BB8-9A55-04631E6813B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FFFEAD8-5CEF-4BB8-9A55-04631E6813B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43274C5B-479B-4340-97B7-7B146D8E919E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43274C5B-479B-4340-97B7-7B146D8E919E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43274C5B-479B-4340-97B7-7B146D8E919E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43274C5B-479B-4340-97B7-7B146D8E919E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

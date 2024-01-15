@@ -1,10 +1,7 @@
 ﻿using Domain;
+using Domain.DbModels;
+using Domain.Deserialized;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {
@@ -12,6 +9,6 @@ namespace Persistence
     {
         public DataContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<BTCToUSD> BTCToUSDLiveCurrency { get; set; }
+        public DbSet<GraphCurrency> GraphCurrencies { get; set; }
     }
 }
