@@ -15,7 +15,7 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:5173/");
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:5173");
     });
 });
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CurrencyList.Handler).Assembly));
