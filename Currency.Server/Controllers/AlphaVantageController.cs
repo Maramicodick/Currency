@@ -10,17 +10,10 @@ namespace Currency.Server.Controllers
 {
     public class AlphaVantageController : BaseApiController
     {
-        private readonly IMediator _mediator;
-
-        public AlphaVantageController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
         public async Task<ActionResult<List<GraphCurrency>>> GetAllCurrencies()
         {
-            return await _mediator.Send(new CurrencyList.Query());
+            return await Mediator.Send(new CurrencyList.Query());
         }
 
         [HttpGet("{id}")]
