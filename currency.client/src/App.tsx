@@ -18,12 +18,11 @@ function App() {
     return (
         <div>
             <Header as="h2" content='BTC to USD' />
-            <LineChart width={400} height={400} data={currencies.map(currency => (currency.exchangeRate))} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                <XAxis dataKey="BTC" />
+            <LineChart width={400} height={400} data={currencies} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+                <XAxis dataKey="date" />
                 <Tooltip />
                 <CartesianGrid stroke="#f5f5f5" />
-                <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
-                <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} />
+                <Line type="monotone" dataKey="exchangeRate" stroke="#ff7300" yAxisId={0} />
             </LineChart>
         </div>
     )
