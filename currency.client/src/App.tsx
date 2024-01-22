@@ -5,10 +5,18 @@ import { Currency } from './models/Currency';
 import { CartesianGrid, Area, AreaChart, Tooltip, XAxis } from 'recharts';
 import moment from 'moment';
 import NavBar from './layout/NavBar';
-import { Container } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 
 function App() {
     const [currencies, setCurrencies] = useState<Currency[]>([]);
+    const [curr, setCurr] = useState<Currency>();
+
+    useEffect(() => {
+        axios.get<Currency>('https://localhost:7146/AlphaVantage/alpha')
+            .then(response => {
+                setCurr(response.data)
+            })
+    })
 
     useEffect(() => {
         axios.get<Currency[]>('https://localhost:7146/AlphaVantage')
@@ -24,6 +32,7 @@ function App() {
     return (
         <div>
             <NavBar />
+            <Header as='h2' content={curr?.date == Date.now.toString() ? curr?.exchangeRate : 'Waiting for data...'} />
             <Container style={{marginTop: '7em'} }>
                 <AreaChart width={ 1200 } height={400} data={currencies} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                     <XAxis dataKey="date" tickFormatter={(tick) => formatXAxis(tick)} />
