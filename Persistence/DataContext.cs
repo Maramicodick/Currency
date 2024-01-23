@@ -10,5 +10,6 @@ namespace Persistence
         public DataContext(DbContextOptions options) : base(options) { }
 
         public DbSet<GraphCurrency> GraphCurrencies { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
     }
 }
