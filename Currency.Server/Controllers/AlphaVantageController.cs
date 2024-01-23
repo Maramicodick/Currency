@@ -3,8 +3,10 @@ using Domain.DbModels;
 using Domain.Deserialized;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Net;
+using System.Threading;
 
 namespace Currency.Server.Controllers
 {
@@ -22,8 +24,8 @@ namespace Currency.Server.Controllers
             return Ok();
         }
 
-        [HttpGet("alpha")]
-        public async Task<ActionResult<RootObject>> AlphaVantageLiveCurrency()
+        /*[HttpGet("alpha")]
+        public async Task<ActionResult<LiveCurrency>> AlphaVantageLiveCurrency()
         {
             string QUERY_URL = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=7YXP3O0J664WGDFM";
             Uri queryUri = new Uri(QUERY_URL);
@@ -34,7 +36,26 @@ namespace Currency.Server.Controllers
                 result = JsonConvert.DeserializeObject<RootObject>(client.DownloadString(queryUri));
             }
 
-            return result;
+
+            LiveCurrency liveCurrency = new LiveCurrency();
+            if (result.RealtimeCurrencyExchangeRate != null)
+            {
+                liveCurrency.BidPrice = result.RealtimeCurrencyExchangeRate.BidPrice;
+                liveCurrency.AskPrice = result.RealtimeCurrencyExchangeRate.AskPrice;
+                liveCurrency.ExchangeRate = result.RealtimeCurrencyExchangeRate.ExchangeRateValue;
+                liveCurrency.LastRefreshed = result.RealtimeCurrencyExchangeRate.LastRefreshed;
+                liveCurrency.ToCurrencyCode = result.RealtimeCurrencyExchangeRate.ToCurrencyCode;
+                liveCurrency.FromCurrencyCode = result.RealtimeCurrencyExchangeRate.FromCurrencyCode;
+            }
+
+
+            return liveCurrency;
+        }*/
+
+        [HttpGet("Currencies")]
+        public async Task<ActionResult<List<Domain.DbModels.Currency>>> GetCurrencies()
+        {
+            return await Mediator.Send(new CurrenciesList.Query());
         }
         /*[HttpGet("Monthly")]
         public async Task<ActionResult<MonthlyExchangeRate>> MonthlyFromDb()
