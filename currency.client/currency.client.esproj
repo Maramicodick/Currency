@@ -9,6 +9,7 @@
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist</PublishAssetsDirectory>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="features\currencies\dashboard\" />
     <Folder Include="src\models\" />
   </ItemGroup>
 </Project>

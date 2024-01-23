@@ -1,5 +1,4 @@
 export interface Currency {
-    id: string
-    exchangeRate: string
-    date: string
+    name: string
+    code: string
 }
