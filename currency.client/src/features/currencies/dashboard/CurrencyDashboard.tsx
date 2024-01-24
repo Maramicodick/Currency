@@ -1,6 +1,5 @@
-import React from 'react';
 import { Grid, List } from 'semantic-ui-react';
-import { Currency } from '../../../src/models/Currency'
+import { Currency } from '../../../app/models/Currency'
 
 interface Props {
     currencies: Currency[];
